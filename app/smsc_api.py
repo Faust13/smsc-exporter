@@ -17,6 +17,21 @@ def getMessages(smsc_host: str, smsc_user: str, smsc_password: str, start_date: 
     total_cost= 0
     msg=defaultdict(int) 
     msg_list = defaultdict(int)
+    msg['notfound'] = 0
+    msg['stopped'] = 0
+    msg['waiting'] = 0
+    msg['transferred'] = 0
+    msg['delivered'] = 0
+    msg['readed'] = 0
+    msg['expired'] = 0
+    msg['link_clicked'] = 0
+    msg['unable_delivery'] = 0
+    msg['wrong_number'] = 0
+    msg['blocked'] = 0
+    msg['out_of_money'] =0
+    msg['number_unreachable'] = 0
+
+
 
     for item in responce:
         current_index = responce.index(item)
