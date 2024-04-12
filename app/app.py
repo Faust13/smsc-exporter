@@ -37,19 +37,18 @@ def generateMetrics():
         balance = f"csms_balance {balance_raw} {timestamp}\n"
         data = balance_descrion + balance_type + balance
 
+    messages_raw = smsc_api.getMessages(SMSC['ENDPOINT'], SMSC['LOGIN'], SMSC['PASSWORD'], today, SMSC['MESSAGE_LIMIT'])
+    total_sent_description = '# HELP csms_messages_total_sent Total number of all sent SMS messages.\n'
+    total_sent_type = '# TYPE csms_messages_total_sent counter\n'
+    total_sent = f"csms_messages_total_sent {messages_raw[1]} {timestamp}\n"
+    data = data + total_sent_description + total_sent_type + total_sent
     if METRICS["TOTAL_COST"]==True:
-        messages_raw = smsc_api.getMessages(SMSC['ENDPOINT'], SMSC['LOGIN'], SMSC['PASSWORD'], today, SMSC['MESSAGE_LIMIT'])
         total_cost_description = '# HELP csms_messages_total_cost Total cost of all sent SMS messages.\n'
         total_cost_type = '# TYPE csms_messages_total_cost gauge\n'
         total_cost = f"csms_messages_total_cost {messages_raw[0]} {timestamp}\n"
-    
         data = data + total_cost_description + total_cost_type + total_cost
     
-        total_sent_description = '# HELP csms_messages_total_sent Total number of all sent SMS messages.\n'
-        total_sent_type = '# TYPE csms_messages_total_sent counter\n'
-        total_sent = f"csms_messages_total_sent {messages_raw[1]} {timestamp}\n"
 
-        data = data + total_sent_description + total_sent_type + total_sent
 
     if METRICS['TRACE_MESAGES']==True:
         messages_counters = messages_raw[2]
