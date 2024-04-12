@@ -9,7 +9,6 @@ SMSC = {
 METRICS = {
     "BALANCE" : os.environ.get('METRIC_BALANCE', True),
     "TOTAL_COST": os.environ.get('METRIC_TOTAL_COST', True),
-    ""
     "TRACE_MESAGES" : os.environ.get('EXPORTER_TRACE_MESAGES', True),
 
 }
