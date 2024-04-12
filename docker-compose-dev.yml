@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    restart: always
+    ports:
+      - '5000:5000'
+    environment:
+      SMSC_ENDPOINT: "https://smsc.ru/sys"
+      SMSC_LOGIN: 'test'
+      SMSC_PASSWORD: 'test'
+      METRIC_BALANCE: true
+      METRIC_TOTAL_COST: true
+      TRACE_MESAGES: true
+      STAT_INTERVAL: 'week'
